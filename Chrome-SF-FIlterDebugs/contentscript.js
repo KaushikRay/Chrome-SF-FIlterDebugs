@@ -82,11 +82,9 @@ function filterOnDebugText() {
     var finalDebugLines = '';
     for (var i = 0; i < debugLines.length; i++) {
         if (debugLines[i].indexOf('|DEBUG|') != -1) {
-            console.log('debugLines[i] -->', debugLines[i]);
             finalDebugLines = finalDebugLines + debugLines[i] + '\n';
         }
     }
-    console.log('finalDebugLines -->', debugLines.length);
     $('.codeBlock').html(finalDebugLines);
 }
 
