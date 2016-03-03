@@ -13,17 +13,38 @@ createDOMDebugButton();
  * @method     createDOMShareButton
  */
 function createDOMDebugButton() {
+    verifyCurrentURL();
+}
+
+/**
+ * Content script method to get current tab url
+ * Record id will be extracted from same
+ *
+ * @method     verifyCurrentURL
+ */
+function verifyCurrentURL() {
+    chrome.runtime.sendMessage({type: "getCurrentTaburl"}, function(response) {
+        var currentURL = response.currentTaburl;
+        if (currentURL.indexOf('ApexDebugLogDetailEdit') != -1) {
+            createActualDOMCheckbox()
+        }
+    });
+}
+
+function createActualDOMCheckbox() {
     $('.codeBlock').before(
         '<input type="checkbox" class="btn" id="debugOnlyCheckbox">SHOW ONLY DEBUG STATEMENTS</input><br>'
     );
 
     $(document).on("click", "#debugOnlyCheckbox", function(){
+        console.log('checked -->' + $(this).is(':checked'));
         if ($(this).is(':checked')) {
             initiateFilterDebugProcess();
         } else {
             showCompleteDebug();
         }
     });
+
 }
 
 function showCompleteDebug() {
@@ -46,9 +67,7 @@ function initiateFilterDebugProcess() {
  * @method     setSessionInstance
  */
 function setSessionInstance() {
-    chrome.runtime.sendMessage({type: "getSessionId"}, function(response) {
-        filterOnDebugText();
-    });
+    filterOnDebugText();
 }
 
 /**
