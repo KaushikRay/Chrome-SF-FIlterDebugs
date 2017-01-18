@@ -1,4 +1,4 @@
-# Chrome-SF-FIlterDebugs Poll 1
+# Chrome-SF-FIlterDebugs Poll 2
 
 # This plugin will add a checkbox on standard Salesforce debug page to display only debug statements
 What is new V 1.2
